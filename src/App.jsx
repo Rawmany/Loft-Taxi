@@ -1,14 +1,10 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import { Profile } from "./Profile";
-import { Home } from "./Home";
-import { About } from "./About";
-import "./App.css";
-
-const PAGES = {
-  home: <Home />,
-  about: <About />,
-  profile: <Profile />,
-};
+import { Login } from './Login';
+import { Registration } from './Registration';
+import { Map } from './Map';
+import { Profile } from './Profile';
+import './App.css';
 
 class App extends React.Component {
   state = { currentPage: "home" };
@@ -18,46 +14,56 @@ class App extends React.Component {
   };
 
   render() {
-    return (
-      <>
-        <header>
-          <nav>
-            <ul>
-              <li>
-                <a
-                  onClick={() => {
-                    this.navigateTo("home");
-                  }}
-                >
-                  Home
+    return <>
+      <header>
+        <nav>
+          <ul>
+            <li>
+              <a
+                onClick={() => {
+                  this.navigateTo("login");
+                }}
+              >
+                Войти
                 </a>
-              </li>
-              <li>
-                <a
-                  onClick={() => {
-                    this.navigateTo("about");
-                  }}
-                >
-                  About
+            </li>
+            <li>
+              <a
+                onClick={() => {
+                  this.navigateTo("registration");
+                }}
+              >
+                Регистрация
                 </a>
-              </li>
-              <li>
-                <a
-                  onClick={() => {
-                    this.navigateTo("profile");
-                  }}
-                >
-                  Profile
+            </li>
+            <li>
+              <a
+                onClick={() => {
+                  this.navigateTo("map");
+                }}
+              >
+                Карта
                 </a>
-              </li>
-            </ul>
-          </nav>
-        </header>
-        <main data-testid="container">
-          <section>{PAGES[this.state.currentPage]}</section>
-        </main>
-      </>
-    );
+            </li>
+            <li>
+              <a
+                onClick={() => {
+                  this.navigateTo("profile");
+                }}
+              >
+                Профиль
+                </a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <main data-testid="container">
+      {this.state.currentPage === 'login' && <Login navigate={this.navigateTo} />}
+        {this.state.currentPage === 'profile' && <Profile />}
+        {this.state.currentPage === 'map' && <Map />}
+        {this.state.currentPage === 'registration' && <Registration navigate={this.navigateTo} />}
+      </main>
+    </>;
   }
 }
 
