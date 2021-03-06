@@ -1,50 +1,55 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
+import Button from "@material-ui/core/Button"
 
 export class Menu extends React.Component {
 
   render() {
+    const styles = {
+      marginRight: '20px',
+    };
     return (
       <nav>
-        <ul>
-          <li>
-            <button
-              onClick={() => {
-                this.props.navigate("login");
-              }}
-            >
-              Войти
-      </button>
-          </li>
-          <li>
-            <button
-              onClick={() => {
-                this.props.navigate("registration");
-              }}
-            >
-              Регистрация
-      </button>
-          </li>
-          <li>
-            <button
-              onClick={() => {
-                this.props.navigate("map");
-              }}
-            >
-              Карта
-      </button>
-          </li>
-          <li>
-            <button
-              onClick={() => {
-                this.props.navigate("profile");
-              }}
-            >
-              Профиль
-      </button>
-          </li>
-        </ul>
+        <Button         
+          style={styles}        
+          variant="contained"
+          color="primary"
+          onClick={() => {
+            this.props.navigate("login");
+          }}>Войти</Button>
+
+        <Button 
+          style={styles} 
+          variant="contained"
+          color="primary"
+          onClick={() => {
+            this.props.navigate("registration");
+          }}
+        >
+          Регистрация
+      </Button>
+
+        <Button
+          style={styles} 
+          variant="contained"
+          color="primary"
+          onClick={() => {
+            this.props.navigate("map");
+          }}
+        >
+          Карта
+      </Button>
+
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => {
+            this.props.navigate("profile");
+          }}
+        >
+          Профиль
+      </Button>
       </nav>
     )
   }
 }
+

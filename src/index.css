@@ -25,3 +25,8 @@ code {
   left: 0;
   bottom: 0;
 }
+
+.MuiButton-root {
+  display: flex;
+  margin-left: 15px;
+}

@@ -9,11 +9,11 @@ import PropTypes from 'prop-types';
 import './App.css';
 
 class App extends React.Component {
-  state = { currentPage: "login" }; //state, в котром содержится текущая станица (currentPage начальное значение)
+  state = { currentPage: "login" }; 
 
-  navigateTo = (page) => {    // метод для изменения текущей страницы
+  navigateTo = (page) => {    
     if (this.props.isLoggedIn || page !== 'map') {
-      this.setState({ currentPage: page }); //обновляем currentPage на новое значение страницы
+      this.setState({ currentPage: page }); 
     } else {
       this.setState({ currentPage: "login" });
     }
