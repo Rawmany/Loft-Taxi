@@ -1,16 +1,22 @@
 import React from "react";
 import Button from "@material-ui/core/Button"
+import { withStyles } from '@material-ui/core/styles';
 
-export class Menu extends React.Component {
+const styles = {
+  button: {
+    marginRight: '20px',    
+  }
+};
+
+export class MenuComponent extends React.Component {
 
   render() {
-    const styles = {
-      marginRight: '20px',
-    };
+    const { classes } = this.props;
+
     return (
       <nav>
         <Button         
-          style={styles}        
+          className={classes.button}        
           variant="contained"
           color="primary"
           onClick={() => {
@@ -18,7 +24,7 @@ export class Menu extends React.Component {
           }}>Войти</Button>
 
         <Button 
-          style={styles} 
+          className={classes.button}  
           variant="contained"
           color="primary"
           onClick={() => {
@@ -29,7 +35,7 @@ export class Menu extends React.Component {
       </Button>
 
         <Button
-          style={styles} 
+          className={classes.button}  
           variant="contained"
           color="primary"
           onClick={() => {
@@ -40,6 +46,7 @@ export class Menu extends React.Component {
       </Button>
 
         <Button
+          className={classes.button}  
           variant="contained"
           color="primary"
           onClick={() => {
@@ -53,3 +60,4 @@ export class Menu extends React.Component {
   }
 }
 
+export const Menu = withStyles(styles)(MenuComponent)

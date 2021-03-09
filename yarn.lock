@@ -9403,6 +9403,11 @@
     "object-assign" "^4.1.1"
     "react-is" "^16.8.1"
 
+"proptypes@^1.1.0":
+  "integrity" "sha1-eLOCilqmuxMIk54N48YETf1L0jk="
+  "resolved" "https://registry.npmjs.org/proptypes/-/proptypes-1.1.0.tgz"
+  "version" "1.1.0"
+
 "protocol-buffers-schema@^3.3.1":
   "integrity" "sha512-YVCvdhxWNDP8/nJDyXLuM+UFsuPk4+1PB7WGPVDzm3HTHbzFLxQYeW2iZpS4mmnXrQJGBzt230t/BbEb7PrQaw=="
   "resolved" "https://registry.yarnpkg.com/protocol-buffers-schema/-/protocol-buffers-schema-3.5.1.tgz"

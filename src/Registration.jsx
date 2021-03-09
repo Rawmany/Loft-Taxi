@@ -8,6 +8,7 @@ export class Registration extends React.Component {
   }
 
   render() {
+    const { classes } = this.props;
     return (
       <form>
         <div>
