@@ -9,21 +9,33 @@ const styles = {
   form: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     width: '280px',
     height: '330px',
     padding: '12px 92px',
     background: '#ffffff',
-    position: 'absolute',
+    // position: 'absolute',
     top: '22 %',
     right: '10 %',
     boxShadow: '0px 0px 40px rgba(0, 0, 0, 0.1)',
-    // borderRadius: '20px',
   },
-background: {
-  backgroundImage: `url(${image})`,
+  background: {
+    backgroundImage: `url(${image})`,
     height: '100vh',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
   },
+  formWrapper: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+
+  title: {
+    display: 'flex',
+    alignItems: 'center',    
+  }
 };
 
 export class Login extends React.Component {
@@ -51,14 +63,18 @@ export class Login extends React.Component {
           </p>
         ) : (
           <div className={classes.background}>
-            <p>Новый пользователь?<a onClick={this.Registr}>Зарегистрируйтесь</a></p>
-            <form className={classes.form} onSubmit={this.authenticate}>
-              <label htmlFor="email"></label>
-              <input id="email" type="email" name="email" size="28" placeholder="Имя пользователя*" />
-              <label htmlFor="password"></label>
-              <input id="password" type="password" name="password" size="28" placeholder="Пароль*" />
-              <button type="submit">Войти</button>
-            </form>
+            <div className={classes.formWrapper}>
+              <form className={classes.form} onSubmit={this.authenticate}>
+                <div classname={classes.title}>
+                <p>Новый пользователь?<a onClick={this.Registr}>Зарегистрируйтесь</a></p>
+                </div>
+                <label htmlFor="email"></label>
+                <input id="email" type="email" name="email" size="28" placeholder="Имя пользователя*" />
+                <label htmlFor="password"></label>
+                <input id="password" type="password" name="password" size="28" placeholder="Пароль*" />
+                <button type="submit">Войти</button>
+              </form>
+            </div>
           </div>
         )}
       </>
