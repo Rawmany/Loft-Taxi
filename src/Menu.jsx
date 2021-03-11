@@ -21,18 +21,7 @@ export class MenuComponent extends React.Component {
           color="primary"
           onClick={() => {
             this.props.navigate("login");
-          }}>Войти</Button>
-
-        <Button 
-          className={classes.button}  
-          variant="contained"
-          color="primary"
-          onClick={() => {
-            this.props.navigate("registration");
-          }}
-        >
-          Регистрация
-      </Button>
+          }}>Войти</Button>       
 
         <Button
           className={classes.button}  
