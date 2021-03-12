@@ -16,17 +16,21 @@ export class Registration extends React.Component {
   };
 
   render() {
+    const { classes } = this.props;
     return (
       <>
         {this.props.isLoggedIn ? (
           <p>
             You are logged in{" "}
-            <button onClick={this.goToProfile}>
+            <button onClick={this.goToProfile = (event) => {
+              event.preventDefault();
+              this.props.navigate("profile");
+            }}>
               go to profile
         </button>
           </p>
         ) : (
-          <form>
+          <form className={classes.form} onSubmit={this.authenticate}>
             <div>
               <div>
                 <h1>Регистрация</h1>

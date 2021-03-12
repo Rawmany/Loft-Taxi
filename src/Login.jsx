@@ -35,7 +35,7 @@ export class Login extends React.Component {
           <div className={classes.background}>
             <div className={classes.formWrapper}>
               <form className={classes.form} onSubmit={this.authenticate}>
-                <div classname={classes.title}>
+                <div className={classes.title}>
                 <Button 
                   onClick={() => {
                   this.props.navigate("registration")}}
