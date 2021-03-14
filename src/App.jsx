@@ -1,40 +1,37 @@
 import React from "react";
-import { LoginWithAuth } from './Login';
-import { RegistrationWithAuth } from './Registration';
+import { LoginWithConnect } from './Login';
 import { Map } from './Map';
-import { ProfileWithAuth } from './Profile';
-import { withAuth } from "./AuthContext";
+import { ProfileWithConnect } from './Profile';
 import { Menu } from './Menu';
-import PropTypes from 'prop-types';
+import { Registration } from './Registration';
+import { Switch, Route } from "react-router-dom";
+import { PrivateRoute } from "./PrivateRoute";
 import './App.css';
+import { Logo, MCIcon } from 'loft-taxi-mui-theme';
 
 class App extends React.Component {
-  state = { currentPage: "login" }; 
-
-  navigateTo = (page) => {    
-    if (this.props.isLoggedIn || page === 'login' || page === 'registration' ) {
-      this.setState({ currentPage: page }); 
-    } 
-  };
 
   render() {
     return <>
       <header>
-        <Menu navigate={this.navigateTo} />
+        <Menu />
       </header>
       <main data-testid="container">
-        {this.state.currentPage === 'login' && <LoginWithAuth navigate={this.navigateTo} />}
-        {this.state.currentPage === 'profile' && <ProfileWithAuth navigate={this.navigateTo} />}
-        {this.state.currentPage === 'map' && <Map />}
-        {this.state.currentPage === 'registration' && <RegistrationWithAuth navigate={this.navigateTo} />}
+        <section>
+          <Switch>
+            <Route exact path="/" component={LoginWithConnect} />
+            <Route exact path="/registration" component={Registration} />
+            <PrivateRoute path="/map" component={Map} />
+            <PrivateRoute path="/profile" component={ProfileWithConnect} />
+          </Switch>
+        </section>
       </main>
+      <Logo />
+      <MCIcon />
     </>;
   }
 }
 
-App.propTypes = {
-  isLoggedIn: PropTypes.bool
-};
 
 
-export default withAuth(App);
+export default App;

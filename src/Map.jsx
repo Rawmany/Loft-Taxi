@@ -11,9 +11,9 @@ export class Map extends Component {
 
     this.map = new mapboxgl.Map({
       container: this.mapContainer.current,
-      style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
-      center: [55.75395, 37.63178], // starting position Эрмитаж
-      zoom: 10 // starting zoom
+      style: 'mapbox://styles/mapbox/streets-v11', 
+      center: [55.75395, 37.63178], 
+      zoom: 10 
     });
   }
 

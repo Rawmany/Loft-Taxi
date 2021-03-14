@@ -1,52 +1,26 @@
 import React from "react";
-import Button from "@material-ui/core/Button"
-import { withStyles } from '@material-ui/core/styles';
+import { Link } from "react-router-dom";
 
-const styles = {
-  button: {
-    marginRight: '20px',    
-  }
-};
-
-export class MenuComponent extends React.Component {
+export class Menu extends React.Component {
 
   render() {
-    const { classes } = this.props;
-
     return (
       <nav>
-        <Button         
-          className={classes.button}        
-          variant="contained"
-          color="primary"
-          onClick={() => {
-            this.props.navigate("login");
-          }}>Войти</Button>       
-
-        <Button
-          className={classes.button}  
-          variant="contained"
-          color="primary"
-          onClick={() => {
-            this.props.navigate("map");
-          }}
-        >
-          Карта
-      </Button>
-
-        <Button
-          className={classes.button}  
-          variant="contained"
-          color="primary"
-          onClick={() => {
-            this.props.navigate("profile");
-          }}
-        >
-          Профиль
-      </Button>
+        <ul>
+          <li>
+            <Link to='/'>Войти</Link>
+          </li>
+          <li>
+            <Link to='/registration'>Регистрация</Link>
+          </li>
+          <li>
+            <Link to="/map">Карта</Link>
+          </li>
+          <li>
+            <Link to="/profile">Профиль</Link>
+          </li>
+        </ul>
       </nav>
     )
   }
 }
-
-export const Menu = withStyles(styles)(MenuComponent)

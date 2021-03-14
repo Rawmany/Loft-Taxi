@@ -1,71 +1,43 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import { withAuth } from "./AuthContext";
-import { PropTypes } from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import styles from './style'
-import Button from "@material-ui/core/Button"
-import Input from "@material-ui/core/Input"
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { authenticate } from './actions';
 
 
 export class Login extends React.Component {
-  goToProfile = (event) => {
-    event.preventDefault();
-    this.props.navigate("profile");
-  };
 
   authenticate = (event) => {
     event.preventDefault();
     const { email, password } = event.target;
-    this.props.logIn(email.value, password.value);
+    this.props.authenticate(email.value, password.value);
   };
 
   render() {
-    const { classes } = this.props;
     return (
       <>
         {this.props.isLoggedIn ? (
-          <p>
-            You are logged in{" "}
-            <button onClick={this.goToProfile}>
-              go to profile
-          </button>
-          </p>
+          <div>
+            <h1>Войти<Link to="/profile">Профиль</Link></h1>
+          </div>
         ) : (
-          <div className={classes.background}>
-            <div className={classes.formWrapper}>
-              <form className={classes.form} onSubmit={this.authenticate}>
-                <div className={classes.title}>
-                <Button 
-                  onClick={() => {
-                  this.props.navigate("registration")}}
-                  type="button"
-                  variant="text"
-                  color="primary"
-                  >Зарегистрируйтесь</Button><p>Новый пользователь?</p>
-                </div>
+            <div>
+              <h1>Войти</h1>
+              <p>Новый пользователь?<Link to="/registration">Зарегистрируйтесь</Link></p>
+              <form onSubmit={this.authenticate}>
                 <label htmlFor="email"></label>
-                <Input id="email" type="email" name="email" size="28" placeholder="Имя пользователя*" />
+                <input id="email" type="email" name="email" size="28" placeholder="Имя пользователя*" />
                 <label htmlFor="password"></label>
-                <Input id="password" type="password" name="password" size="28" placeholder="Пароль*" />
-                <Button 
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  >Войти</Button>
+                <input id="password" type="password" name="password" size="28" placeholder="Пароль*" />
+                <button type="submit">Войти</button>
               </form>
             </div>
-          </div>
-        )}
+          )}
       </>
     );
   }
 }
 
-Login.propTypes = {
-  isLoggedIn: PropTypes.bool,
-  logIn: PropTypes.func,
-  navigate: PropTypes.func,
-};
-
-export const LoginWithAuth = withStyles(styles)(withAuth(Login));
+export const LoginWithConnect = connect(
+  (state) => ({ isLoggedIn: state.auth.isLoggedIn }),
+  { authenticate }
+)(Login);
