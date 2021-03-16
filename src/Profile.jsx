@@ -1,24 +1,28 @@
 import React, { Component } from 'react';
-import { logIn, logOut } from './actions';
+import { saveCardRequest } from './actions';
 import { connect } from 'react-redux';
 
-export class Profile extends Component {
-  unauthenticate = (event) => {
-    event.preventDefault();
-    this.props.logOut();
-  };
-
-  render() {
-    return (
-      <p>
-        Profile.
-        <button onClick={this.unauthenticate}>Выйти</button>
-      </p>
-    );
+const Profile = ({ saveCardRequest, isCardSaved }) => {
+  const handleSubmit = (data) => {
+    saveCardRequest(data);
   }
-}
+  return (
+    <>
+    {
+      isCardSaved ? <p>Данные успешно</p> :
+      <form>
+        <input></input>
+        <input></input>
+        <input></input>
+        <input></input>
+        <button type='submit'>Save</button>
+      </form>
+    }
+    </>
+  );
+};
 
 export const ProfileWithConnect = connect(
-  null,
-  { logIn, logOut }
+  (state) => ({ isCardSaved: state.card.isCardSaved }),
+  { saveCardRequest}
 )(Profile);
