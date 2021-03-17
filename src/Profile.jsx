@@ -3,18 +3,18 @@ import { saveCardRequest } from './actions';
 import { connect } from 'react-redux';
 
 const Profile = ({ saveCardRequest, isCardSaved }) => {
-  const handleSubmit = (data) => {
-    saveCardRequest(data);
+  const handleSubmit = (cardnumber, carddate, cardusername, cvc) => {
+    saveCardRequest(cardnumber, carddate, cardusername, cvc);
   }
   return (
     <>
     {
-      isCardSaved ? <p>Данные успешно</p> :
-      <form>
-        <input></input>
-        <input></input>
-        <input></input>
-        <input></input>
+      isCardSaved ? <p>Данные успешно сохранены</p> :
+      <form onSubmit={handleSubmit}>
+        <input name="cardnumber" placeholder="Номер карты*"></input>
+        <input name="carddate" defaultValue="01/21"></input>
+        <input name="cardusername" placeholder="Имя владельца*"></input>
+        <input name="cvc" placeholder="CVC*"></input>
         <button type='submit'>Save</button>
       </form>
     }
