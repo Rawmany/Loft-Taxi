@@ -29,10 +29,10 @@ const Profile = ({ saveCardRequest, isCardSaved }) => {
     {
       isCardSaved ? <p>Данные успешно сохранены</p> :
       <form onSubmit={handleSubmit}>
-        <input name="cardNumber" onchange={handleChange} value={formData.cardNumber} placeholder="Номер карты*" />
-        <input name="expiryDate" onchange={handleChange} value={formData.expiryDate} defaultValue="01/21" />
-        <input name="cardName" onchange={handleChange} value={formData.cardName} placeholder="Имя владельца*" />
-        <input name="cvc" onchange={handleChange} value={formData.cvc} placeholder="CVC*" />
+        <input name="cardNumber" onChange={handleChange} value={formData.cardNumber} placeholder="Номер карты*" />
+        <input name="expiryDate" onChange={handleChange} value={formData.expiryDate} defaultValue="01/21" />
+        <input name="cardName" onChange={handleChange} value={formData.cardName} placeholder="Имя владельца*" />
+        <input name="cvc" onChange={handleChange} value={formData.cvc} placeholder="CVC*" />
         <button type='submit'>Save</button>
       </form>
     }
