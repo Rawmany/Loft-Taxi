@@ -1,32 +1,43 @@
+* {
+	box-sizing: border-box;
+}
+
+html, body, #root {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	width: 100%;
+}
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	background-image: url('https://pensive-gates-d31754.netlify.app/assets/login-background.jpg');
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+nav {
+	display: block;
+	width: 100%;
 }
 
-.map-wrapper {
-  position: relative;
-  width: 100%;
-  height: 100%;
+ul {
+	margin: 0;
+	padding: 0;
+	display: flex;
+	list-style: none;
+	justify-content: flex-end;
+	width: 100%;
 }
 
-.map {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
+.formContainer {
+	  padding: 44px 60px;
+    min-width: 500px;
+    margin-top: 48px;
+    margin-bottom: 48px;
 }
 
-.MuiButton-root {
-  display: flex;
-  margin-left: 15px;
+.offsetBottom {
+	margin-bottom: 30px !important;
+}
+
+.grid {
+	min-height: 100vh;
 }
