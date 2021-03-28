@@ -27,7 +27,4 @@ Home.propTypes = {
     authenticate: PropTypes.func.isRequired
   }
 
-export const HomeWithAuth = withRouter(connect(
-	(state) => ({isLoggedIn: state.auth.isLoggedIn}),
-	{authenticate, register}
-)(Home));
+export const HomeWithAuth = withRouter(Home);

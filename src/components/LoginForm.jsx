@@ -1,36 +1,29 @@
 import React, {useState, useEffect} from 'react';
 import {PropTypes} from "prop-types";
-import {Link} from 'react-router-dom';
-import { 
-  Paper, 
-  Grid, 
-  Typography, 
-  FormControl,
-  InputLabel,
-  Input,
-  Button
-} from '@material-ui/core';
+import { connect } from 'react-redux'
+import {Link, Redirect} from 'react-router-dom';
+import { authenticate } from '../actions/authActions'
+import {   Paper,   Grid,   Typography,   FormControl,  InputLabel,  Input,  Button } from '@material-ui/core';
 
-export function LoginForm(props) {
+function Form(props) {
 	const [state, setState] = useState({email: "", password: ""})
 
   const handleSubmit = event => {
     event.preventDefault();
    
-    props.authenticate(state.email, state.password)
+    props.authenticate(state)
     
   };
-
-  useEffect(() => {
-    if(props.isLoggedIn) props.history.replace("Map");
-  }, [props.isLoggedIn, props.history])
-
 
   const handleChange = event => {
     setState({...state, [event.target.name]: event.target.value });
   };
 
 	const { email, password } = state;
+
+  if (props.isLoggedIn) {
+    return <Redirect to='map' />
+  }
 
   return (
     <Grid container={true} alignItems="center" justify="center" className="grid">
@@ -96,7 +89,9 @@ export function LoginForm(props) {
   );
 }
 
-LoginForm.propTypes = {
-    isLoggedIn: PropTypes.bool.isRequired,
-    authenticate: PropTypes.func.isRequired
-  }
+export const LoginForm = connect(
+  (state) => ({isLoggedIn: state.auth.isLoggedIn}),
+  {authenticate}) (Form);
+
+
+

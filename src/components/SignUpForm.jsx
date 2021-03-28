@@ -1,29 +1,23 @@
 import React, {useState, useEffect} from 'react';
 import {PropTypes} from "prop-types";
-import {Link} from 'react-router-dom';
-import { 
-  Paper, 
-  Grid, 
-  Typography, 
-  FormControl,
-  InputLabel,
-  Input,
-  Button
-} from '@material-ui/core';
+import { connect } from 'react-redux'
+import {Link, Redirect} from 'react-router-dom';
+import { register } from '../actions/registerAction'
+import {   Paper,   Grid,   Typography,   FormControl,  InputLabel,  Input,  Button } from '@material-ui/core';
 
-export function SignUpForm(props) {
+function Form(props) {
   
   const [state, setState] = useState({
     email: "",
     name: "",
-    lastName: "",
+    surname: "",
     password: ""
   })
 
 	const handleSubmit = event => {
     event.preventDefault();
     
-    props.register(state.email, state.password, state.name, state.lastName)
+    props.register(state)
   };
 
   useEffect(() => {
@@ -86,7 +80,7 @@ export function SignUpForm(props) {
             <Input 
               id="lastName" 
               aria-describedby="my-helper-text" 
-              name="lastName"
+              name="surname"
               data-testid="lastName"
               value={lastName}
               className="offsetBottom"
@@ -126,6 +120,10 @@ export function SignUpForm(props) {
     </Grid>
   );
 }
+
+export const SignUpForm = connect(
+  (state) => ({isLoggedIn: state.auth.isLoggedIn}),
+  {register}) (Form);
 
 SignUpForm.propTypes = {
     isLoggedIn: PropTypes.bool.isRequired,

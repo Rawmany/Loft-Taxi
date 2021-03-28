@@ -1,26 +1,20 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {connect} from 'react-redux';
 import {PropTypes} from "prop-types";
-import {sendCard, getCard} from '../actions/cardActions';
+import {sendCard, getCardRequest} from '../actions/cardActions';
 import {   Paper,   Grid,   Typography,   FormControl,  InputLabel,  Button,  InputBase,  Box} from '@material-ui/core';
 import styles from '../css/profile.module.css';
 
 export function Profile(props) {
-	const [state, setState] = useState({
-				cardNumber: localStorage.cardNumber, 
-				expiryDate: localStorage.expiryDate, 
-				cardName: localStorage.cardName, 
-				cvc: localStorage.cvc})
+	const [state, setState] = useState(props.card.card)
 
 	const { cardNumber, expiryDate, cardName, cvc } = state;
-	useEffect(() => {
-		props.getCard()
-	})
+	
 
 	const handleClick = event => {
 		event.preventDefault();
 		
-		props.sendCard(state.cardNumber, state.expiryDate, state.cardName, state.cvc)
+		props.sendCard( ...state, {token: props.token} )
 	}
 	const handleChange = event => {
     setState({...state, [event.target.name]: event.target.value });
@@ -125,11 +119,6 @@ Profile.propTypes = {
 }
 
 export const ProfileWithAuth = connect(
-	(state) => ({
-		cardNumber: state.card.cardNumber,
-		expiryDate: state.card.expiryDate,
-		cardName: state.card.cardName,
-		cvc: state.card.cvc
-	}),
-	{sendCard, getCard}
+	(state) => ({ card: state.card, token: state.auth.token }),
+	{sendCard}
 )(Profile);

@@ -1,27 +1,40 @@
-export const serverLogin = async (email, password) => {
+export const serverLogin = async (data) => {
 	return fetch(
-		`https://loft-taxi.glitch.me/auth?username=${email}&password=${password}`
-	).then(res => res.json()).then(data => data.success)
+		`https://loft-taxi.glitch.me/auth`,
+		{
+			method: 'POST',
+			headers: {'Content-Type' : 'application/json;charset=utf-8'},
+			body: JSON.stringify(data)
+		}
+	).then(res => res.json());
 }
 
-export const serverRegister = async (email, password, name, surname) => {
+export const serverRegister = async (data) => {
 	return fetch(
-		`https://loft-taxi.glitch.me/register?email=${email}&password=${password}&name=${name}&surname=${surname}&token=AUTH_TOKEN`,
-		{method: "POST"}
-	).then(res => res.json()).then(data => data.success)
+		`https://loft-taxi.glitch.me/register`,
+		{
+			method: "POST",
+			headers: {'Content-Type' : 'application/json;charset=utf-8'},
+			body: JSON.stringify(data)
+		}
+	).then(res => res.json());
 }
 
-export const serverAddCard = async (cardNumber, expiryDate, cardName, cvc) => {
+export const serverAddCard = async (data) => {
 	return fetch(
-		`https://loft-taxi.glitch.me/card?cardNumber=${cardNumber}&expiryDate=${expiryDate}&cardName=${cardName}&cvc=${cvc}&token=AUTH_TOKEN`,
-		{method: "POST"}
-	).then(res => res.json()).then(data => data.success)
+		`https://loft-taxi.glitch.me/card`,
+		{
+			method: "POST",
+			headers: {"Content-Type": "application/json;charset=utf-8"},
+      		body: JSON.stringify({ data })
+		}
+	).then(res => res.json())
 }
 
-export const serverGetCard = async () => {
+export const serverGetCard = async (token) => {
 	return fetch(
-		`https://loft-taxi.glitch.me/card?token=AUTH_TOKEN`
-	).then(res => res.json()).then(data => data)
+		`https://loft-taxi.glitch.me/card?token=${token}`
+	).then(res => res.json());
 }
 
 export const serverGetRoute = async () => {

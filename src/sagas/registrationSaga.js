@@ -4,11 +4,11 @@ import {register} from '../actions/registerAction';
 import {serverRegister} from '../api';
 
 export function* registerSaga(action) {
-	const {email, password, name, surname} = action.payload;
-	const result = yield call(serverRegister, email, password, name, surname)
-	if(result) {
+	const data = action.payload;
+	const result = yield call(serverRegister, data)
+	if(result.success) {
 		localStorage.isLoggedIn = true;
-		yield put(logIn())
+		yield put(logIn(result.token))
 	}
 }
 

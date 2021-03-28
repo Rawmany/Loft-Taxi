@@ -1,29 +1,24 @@
-import {takeEvery, call, put} from 'redux-saga/effects';
-import {sendCard, getCard, addCard} from '../actions/cardActions';
+import {takeEvery, call, put, select} from 'redux-saga/effects';
+import {sendCard, addCard, getCardRequest, getCardSuccess} from '../actions/cardActions';
 import {serverAddCard, serverGetCard} from '../api';
 
 export function* sendCardSaga(action) {
-	const {cardNumber, expiryDate, cardName, cvc} = action.payload;
-	const result = yield call(serverAddCard, cardNumber, expiryDate, cardName, cvc)
-	if(result) {
-		localStorage.cardNumber = cardNumber;
-		localStorage.expiryDate = expiryDate;
-		localStorage.cardName = cardName;
-		localStorage.cvc = cvc;
-		localStorage.hasCard = true;
-		yield put(addCard(cardNumber, expiryDate, cardName, cvc))
+	const data = action.payload;
+	const result = yield call(serverAddCard, data)
+	if(result) {		
+		yield put(addCard())
 	}
 }
 
 export function* getCardSaga(action) {
-	const result = yield call(serverGetCard)
+	const token = yield select(state => state.auth.token);
+	const result = yield call(serverGetCard, token)
 	if(result) {
-		const {cardNumber, expiryDate, cardName, cvc} = localStorage;
-		yield put(addCard(cardNumber, expiryDate, cardName, cvc))
+		yield put(getCardSuccess(result))
 	}
 }
 
 export function* paymentSaga() {
 	yield takeEvery(sendCard, sendCardSaga);
-	yield takeEvery(getCard, getCardSaga);
+	yield takeEvery(getCardRequest, getCardSaga);
 }

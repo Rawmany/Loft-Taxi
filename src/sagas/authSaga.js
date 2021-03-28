@@ -2,12 +2,12 @@ import {takeEvery, call, put} from 'redux-saga/effects';
 import {authenticate, logIn} from '../actions/authActions';
 import {serverLogin} from '../api';
 
-export function* authenticateSaga(action) {
-	const {email, password} = action.payload;
-	const result = yield call(serverLogin, email, password)
-	if(result) {
+export function* authenticateSaga(action) {	
+	const result = yield call(serverLogin, action.payload);
+	cons
+	if(result.success) {
 		localStorage.isLoggedIn = true;
-		yield put(logIn())
+		yield put(logIn(result.token))
 	}
 }
 

@@ -2,6 +2,7 @@ import React, {useEffect, useState, useRef} from 'react';
 import mapbox from 'mapbox-gl';
 import {connect} from 'react-redux';
 import {getRoute, getAddress} from '../actions/routeActions';
+import { getCardRequest } from "../actions/cardActions";
 import { 
   Paper, 
   Grid, 
@@ -36,8 +37,9 @@ export function Map(props) {
 	}, []);
 
 	useEffect(() => {
-		props.getRoute()
-	}, []);
+		props.getRoute();
+		props.getCardRequest();
+	}, []);	
 
 	useEffect(() => {
 		drawRoute(map.current, props.coordinates);
@@ -244,5 +246,5 @@ const mapStateToProps = function(state) {
 
 export const MapWithConnect = connect(
 	mapStateToProps,
-	{getRoute, getAddress}
+	{getRoute, getAddress, getCardRequest}
 )(Map);

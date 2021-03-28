@@ -9,17 +9,26 @@ if(key === "false") {
 }
 
 export const initialState = {
-	isLoggedIn: key
+	isLoggedIn: false,
+	token: null
 }
 
-export default function (state = initialState, action) {
+export default function authReducer(state = initialState, action) {
 	switch (action.type) {
 		case logIn.toString(): {
-			return {isLoggedIn: true}
+			return {
+				isLoggedIn: true.valueOf,
+				token: action.payload
+			}
 		}
+
 		case logOut.toString(): {
-			return {isLoggedIn: false}
+			return {
+				isLoggedIn: false,
+				token: null
+			}
 		}
+
 		default:
 			return state;
 	}
