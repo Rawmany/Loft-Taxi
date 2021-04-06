@@ -1,24 +1,26 @@
-import {addCard, getCardSuccess} from "../actions/cardActions";
+import { addCard, getCardSuccess } from "../actions/cardActions";
 
 export const initialState = {
-	card: {
-		cardNumber: "", 
-		expiryDate: "", 
-		cardName: "", 
-		cvc: ""
-	}	
+	cardNumber: "",
+	expiryDate: "",
+	cardName: "",
+	cvc: "",
+	isSaved: false
 }
 
 export default function (state = initialState, action) {
 	switch (action.type) {
 		case addCard.toString(): {
-			return Object.assign({}, state, action.payload)
-		}
-
-		case getCardSuccess.toString() : {
 			return {
 				...state,
-				card: action.payload
+				hasCard: true,
+			}
+		}
+
+		case getCardSuccess.toString(): {
+			return {
+				...state,
+				...action.payload
 			}
 		}
 		default:

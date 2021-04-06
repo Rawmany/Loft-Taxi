@@ -5,7 +5,7 @@ import {serverAddCard, serverGetCard} from '../api';
 export function* sendCardSaga(action) {
 	const data = action.payload;
 	const result = yield call(serverAddCard, data)
-	if(result) {		
+	if(result.success) {		
 		yield put(addCard())
 	}
 }

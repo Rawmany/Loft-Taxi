@@ -4,24 +4,38 @@ import {PropTypes} from "prop-types";
 import {sendCard, getCardRequest} from '../actions/cardActions';
 import {   Paper,   Grid,   Typography,   FormControl,  InputLabel,  Button,  InputBase,  Box} from '@material-ui/core';
 import styles from '../css/profile.module.css';
+import { Link } from "react-router-dom";
+
 
 export function Profile(props) {
-	const [state, setState] = useState(props.card.card)
-
-	const { cardNumber, expiryDate, cardName, cvc } = state;
-	
+	const { hasCard, cardName, cardNumber, cvc, expiryDate } = props.card
+	const [state, setState] = useState({cardName, cardNumber, cvc, expiryDate});
 
 	const handleClick = event => {
 		event.preventDefault();
 		
-		props.sendCard( ...state, {token: props.token} )
+		props.sendCard( {...state, token: props.token} );
 	}
 	const handleChange = event => {
     setState({...state, [event.target.name]: event.target.value });
   };
+
+  
   
 	return (
 		<Grid container={true} alignItems="center" justify="center">
+			{
+				hasCard ? <Paper className={styles.formContainer}>
+				<Typography variant="body1">Платежные данные обновлены. Теперь вы можете заказывать такси.</Typography>
+				<Link to='map'
+					className={styles.button}							
+					variant="contained"
+					color="primary"
+					size="large"
+					align='center'									>
+					Перейти на карту
+				</Link>
+			</Paper> :
       <Grid item>
         <Paper className={styles.formContainer}>
         	 <Typography align="center" variant="h4">
@@ -110,6 +124,7 @@ export function Profile(props) {
         	 </form>
         </Paper>
       </Grid>
+	  }
     </Grid>
 	)
 }
